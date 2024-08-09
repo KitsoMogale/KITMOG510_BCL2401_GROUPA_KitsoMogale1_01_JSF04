@@ -28,7 +28,7 @@
                    <li class="hidden lg:block md:block relative">
                      <div class="t-0 absolute left-3 -top-4">
                        <p class="flex h-2 w-2 items-center  justify-center rounded-full bg-red-500 p-3 text-xs text-white">
-                         {{ mainstore.cartCount }}
+                         {{ mainstore.cartcount }}
                        </p>
                      </div>
                      <svg
@@ -80,9 +80,11 @@
    </template>
 
    <script setup>
-     import {mainStore} from '../store.js'
+import {mainStore} from '../store.js'
 
     const mainstore = mainStore();
+
+    
     
   function logout(){
      mainstore.setLoggedin(false);

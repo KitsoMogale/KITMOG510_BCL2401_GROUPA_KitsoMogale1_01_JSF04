@@ -89,6 +89,11 @@ import {mainStore} from '../../store.js'
     return storedArray ? JSON.parse(storedArray) : [];
 }
 
+  function getCartCount(){
+    const count = localStorage.getItem('cartcount');
+    return count ? count : 0;
+  }
+
     function addToCart(){
       if(mainstore.loggedin){
       
@@ -98,6 +103,11 @@ import {mainStore} from '../../store.js'
        storedArr.push(objProduct);
        localStorage.setItem('cart', JSON.stringify(storedArr));
        added.value = true;
+       let cartcount = getCartCount();
+       cartcount++;
+       localStorage.setItem('cartcount',cartcount);
+       mainstore.setCartCount();
+       console.log(localStorage.getItem('cartcount'))
        setTimeout(()=>{added.value = false},2000);
        }
        else{
