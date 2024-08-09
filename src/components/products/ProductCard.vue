@@ -105,6 +105,10 @@ import {mainStore} from '../../store.js'
         alert("Already added to cart");
        }
       }
+      else{
+        alert("Please loggin ");
+        router.push(`/login`)
+      }
 
     }
 
