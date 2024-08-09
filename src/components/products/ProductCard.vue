@@ -49,7 +49,7 @@
               </svg>
             </button>
 
-            <button class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+            <button type="button" @click="addToCart" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               Add To Cart
             </button>
           </div>
@@ -62,7 +62,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import Ratings from '../Ratings.vue'
   
   const props = defineProps(['product']);
@@ -79,5 +79,16 @@ import Ratings from '../Ratings.vue'
       router.push(`/product/${props.product.id}`)
     }
 
+    function getArrayFromLocalStorage() {
+    const storedArray = localStorage.getItem('myArray');
+    return storedArray ? JSON.parse(storedArray) : [];
+}
+
+    function addToCart(){
+       let objProduct = {img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
+       let storedArr = getArrayFromLocalStorage();
+       storedArr.push(objProduct);
+       localStorage.setItem('myArray', JSON.stringify(storedArr));
+    }
 
 </script>

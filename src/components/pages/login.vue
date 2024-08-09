@@ -35,6 +35,9 @@
             <div v-show="authenticating" class="bg-green-400 w-fit m-auto border-green-900 rounded p-5">
              <p class="m-auto">  Authenticating....</p>
             </div>
+            <div v-show="error1" class="bg-green-400 w-fit m-auto border-green-900 rounded p-5">
+             <p class="m-auto">{{ error2 }}</p>
+            </div>
         </form>
     </div>
 </template>
@@ -45,12 +48,15 @@
 
 let user;
 let password;
+let data;
+let error1 = ref(false);
+let error2 = ref()
 let authenticating = ref(false);
 
 async function login(e){
    e.preventDefault();
    authenticating.value = true;
-  let res = await fetch('https://fakestoreapi.com/auth/login',{
+ try{ let res = await fetch('https://fakestoreapi.com/auth/login',{
             method:'POST',
             headers:{
                "Content-type":"application/json"
@@ -60,8 +66,12 @@ async function login(e){
                 password: `${password}`
             })
         });
-   let data = await res.json();
-            console.log(data)
+    data = await res.json();}
+   catch(error){
+      error2.value = error;
+      error1.value = true;
+      console.log(error)
+   }
             authenticating.value = false;
 }
 
