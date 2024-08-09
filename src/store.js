@@ -15,13 +15,18 @@ export const mainStore = defineStore('mainstore',{
         searchTerm: "",
         filterItem: "All categories",
         loggedin: false,
+        cartCount:0,
 
      }),
 
      actions: {
 
+      setCartCount(){
+        this.cartCount++;
+      },
+
       setLoggedin(bool){
-        this.loggedin = true;
+        this.loggedin = bool;
       },
         setSorting (sorting) {
             this.sorting = sorting;
