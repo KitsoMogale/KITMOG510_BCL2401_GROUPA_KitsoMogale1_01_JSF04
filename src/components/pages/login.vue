@@ -3,20 +3,27 @@
   <div class="w-full max-w-sm p-6 bg-white rounded-lg shadow-md relative m-auto mt-10 ">
         <h2 class="text-2xl font-semibold text-center text-gray-800">Login</h2>
 
-        <form class="mt-8 space-y-6">
+        <form @submit="(e)=>login(e)" class="mt-8 space-y-6">
             <div class="rounded-md shadow-sm">
                 <div>
-                    <label for="email" class="sr-only">Email address</label>
-                    <input id="email" name="email" type="email" autocomplete="email" required
+                    <label for="username" class="sr-only">Username</label>
+                    <input id="username" name="username" type="username" autocomplete="username" required
                         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        placeholder="Email address">
+                        placeholder="Username"
+                        v-model="user">
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 relative">
                     <label for="password" class="sr-only">Password</label>
                     <input id="password" name="password" type="password" autocomplete="current-password" required
                         class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                        placeholder="Password">
+                        placeholder="Password"
+                        v-model="password">
                 </div>
+                <button type="button" @click="togglePassword"  id="btnShow"
+                         class=" px-3 py-2 text-sm text-gray-600 focus:outline-none">
+                        Show
+                    </button>
+
             </div>
 
             <div>
@@ -31,5 +38,39 @@
 
 
 <script setup>
+
+
+let user;
+let password;
+
+function login(e){
+   e.preventDefault();
+   
+   fetch('https://fakestoreapi.com/auth/login',{
+            method:'POST',
+            headers:{
+               "Content-type":"application/json"
+            },
+            body:JSON.stringify({
+                username: `${user}`,
+                password: `${password}`
+            })
+        })
+            .then(res=>res.json())
+            .then(json=>console.log(json))
+}
+
+
+function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const showPasswordButton = document.querySelector('#btnShow');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                showPasswordButton.textContent = 'Hide';
+            } else {
+                passwordInput.type = 'password';
+                showPasswordButton.textContent = 'Show';
+            }
+        }
 
 </script>
