@@ -67,11 +67,13 @@
 import {ref} from 'vue'
 import { useRouter } from 'vue-router'
 import Ratings from '../Ratings.vue'
+import {mainStore} from '../../store.js'
   
   const props = defineProps(['product']);
   const urlImage = ref(props.product.image);
   const router = useRouter();
   let added = ref(false);
+  const mainstore = mainStore();
 
 
 
@@ -89,6 +91,7 @@ import Ratings from '../Ratings.vue'
 }
 
     function addToCart(){
+      if(mainstore.loggedin){
       
        let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
        let storedArr = getArrayFromLocalStorage();
@@ -101,6 +104,7 @@ import Ratings from '../Ratings.vue'
        else{
         alert("Already added to cart");
        }
+      }
 
     }
 

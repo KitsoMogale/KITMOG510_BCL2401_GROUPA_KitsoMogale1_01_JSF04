@@ -45,6 +45,7 @@
 
 <script setup>
   import { ref } from 'vue';
+  import {mainStore} from '../../store.js'
 
 let user;
 let password;
@@ -52,6 +53,7 @@ let data;
 let error1 = ref(false);
 let error2 = ref()
 let authenticating = ref(false);
+const mainstore = mainStore();
 
 async function login(e){
    e.preventDefault();
@@ -72,7 +74,10 @@ async function login(e){
       error1.value = true;
       console.log(error)
    }
-            authenticating.value = false;
+  
+   mainstore.setLoggedin(true);
+   localStorage.setItem('token',data)
+   authenticating.value = false;
 }
 
 

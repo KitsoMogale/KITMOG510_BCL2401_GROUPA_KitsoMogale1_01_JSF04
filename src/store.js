@@ -14,10 +14,15 @@ export const mainStore = defineStore('mainstore',{
         sorting: "default",
         searchTerm: "",
         filterItem: "All categories",
+        loggedin: false,
 
      }),
 
      actions: {
+
+      setLoggedin(bool){
+        this.loggedin = true;
+      },
         setSorting (sorting) {
             this.sorting = sorting;
           },
