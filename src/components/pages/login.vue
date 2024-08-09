@@ -32,21 +32,25 @@
                     Sign in
                 </button>
             </div>
+            <div v-show="authenticating" class="bg-green-400 w-fit m-auto border-green-900 rounded p-5">
+             <p class="m-auto">  Authenticating....</p>
+            </div>
         </form>
     </div>
 </template>
 
 
 <script setup>
-
+  import { ref } from 'vue';
 
 let user;
 let password;
+let authenticating = ref(false);
 
-function login(e){
+async function login(e){
    e.preventDefault();
-   
-   fetch('https://fakestoreapi.com/auth/login',{
+   authenticating.value = true;
+  let res = await fetch('https://fakestoreapi.com/auth/login',{
             method:'POST',
             headers:{
                "Content-type":"application/json"
@@ -55,9 +59,10 @@ function login(e){
                 username: `${user}`,
                 password: `${password}`
             })
-        })
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+        });
+   let data = await res.json();
+            console.log(data)
+            authenticating.value = false;
 }
 
 
