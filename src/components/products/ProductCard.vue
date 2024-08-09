@@ -70,7 +70,6 @@ import Ratings from '../Ratings.vue'
 import {mainStore} from '../../store.js'
   
   const props = defineProps(['product']);
-  const urlImage = ref(props.product.image);
   const router = useRouter();
   let added = ref(false);
   const mainstore = mainStore();

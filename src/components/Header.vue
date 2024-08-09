@@ -58,10 +58,18 @@
    
                  <li>
                    <router-link
+                   v-show="!mainstore.loggedin"
                      to="login"
                      class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
                    >
                      Login
+                   </router-link>
+                   <router-link
+                   v-show="mainstore.loggedin"
+                     to="logout"
+                     class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 "
+                   >
+                     Logout
                    </router-link>
                  </li>
                </ul>
@@ -70,6 +78,12 @@
          </nav>
        </header>
    </template>
+
    <script setup>
+     import {mainStore} from '../store.js'
+
+    const mainstore = mainStore();
+    
+
  
    </script>
