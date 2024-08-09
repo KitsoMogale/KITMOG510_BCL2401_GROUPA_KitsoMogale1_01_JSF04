@@ -1,16 +1,16 @@
 <template >
 
 <div
-      @click='handleClick'
       class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
     >
-      <img class="object-contain h-48 mt-3" :src="props.product.image" alt="Course 01" />
-
+    
+      <img @click='handleClick' class="object-contain h-48 mt-3" :src="props.product.image" alt="Course 01" />
+    
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
           <header class="mb-2 flex-2">
             <h2 class="text-lg line-clamp-2 font-extrabold leading-snug">
-              <div class="text-slate-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300">
+              <div @click='handleClick' class="text-slate-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300">
                 {{props.product.title}}
               </div>
             </h2>
@@ -49,9 +49,12 @@
               </svg>
             </button>
 
-            <button type="button" @click="addToCart" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+            <button  v-show="!added" type="button" @click="addToCart" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               Add To Cart
             </button>
+            <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+             <p class="m-auto"> Added to cart</p>
+            </div>
           </div>
         </div>
       </div>
@@ -68,6 +71,7 @@ import Ratings from '../Ratings.vue'
   const props = defineProps(['product']);
   const urlImage = ref(props.product.image);
   const router = useRouter();
+  let added = ref(false);
 
 
 
@@ -80,15 +84,24 @@ import Ratings from '../Ratings.vue'
     }
 
     function getArrayFromLocalStorage() {
-    const storedArray = localStorage.getItem('myArray');
+    const storedArray = localStorage.getItem('cart');
     return storedArray ? JSON.parse(storedArray) : [];
 }
 
     function addToCart(){
-       let objProduct = {img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
+      
+       let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
        let storedArr = getArrayFromLocalStorage();
+       if(!storedArr.some(item => item.id === objProduct.id)){
        storedArr.push(objProduct);
-       localStorage.setItem('myArray', JSON.stringify(storedArr));
+       localStorage.setItem('cart', JSON.stringify(storedArr));
+       added.value = true;
+       setTimeout(()=>{added.value = false},2000);
+       }
+       else{
+        alert("Already added to cart");
+       }
+
     }
 
 </script>

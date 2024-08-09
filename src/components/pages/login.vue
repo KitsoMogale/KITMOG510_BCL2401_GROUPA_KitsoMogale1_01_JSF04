@@ -35,7 +35,7 @@
             <div v-show="authenticating" class="bg-green-400 w-fit m-auto border-green-900 rounded p-5">
              <p class="m-auto">  Authenticating....</p>
             </div>
-            <div v-show="error1" class="bg-green-400 w-fit m-auto border-green-900 rounded p-5">
+            <div v-show="error1" class="bg-red-400 w-fit m-auto border-green-900 rounded p-5">
              <p class="m-auto">{{ error2 }}</p>
             </div>
         </form>
