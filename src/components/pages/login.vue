@@ -76,7 +76,7 @@ async function login(e){
    }
   
    mainstore.setLoggedin(true);
-   localStorage.setItem('token',data)
+   localStorage.setItem('token',JSON.stringify(data));
    authenticating.value = false;
 }
 
