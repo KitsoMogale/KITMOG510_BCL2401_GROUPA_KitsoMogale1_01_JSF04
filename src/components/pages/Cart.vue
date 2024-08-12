@@ -1,13 +1,15 @@
 <template >
-
+   <h1 class="bg-white w-40 text-2xl font-semibold text-orange-400 border mx-auto">Shopping Cart</h1>
   <div v-if="cart">
+    <div class="grid justify-center">
+        <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
      <template v-for="product in cart">
         
      <div
          class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
         >
     
-         <img class="object-contain h-48 mt-3" :src="product.image" alt="img" />
+         <img class="object-contain h-48 mt-3" :src="product.img" alt="img" />
     
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
@@ -28,18 +30,32 @@
             <span class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">
               {{product.category}}
             </span>
+            <button @click="()=>remove(product)"
+            class="inline-flex justify-center whitespace-nowrap rounded-lg bg-red-400 px-3 py-2 text-sm font-medium text-white hover:bg-red-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors"
+            >Remove</button>
           </div>
         </div>
       </div>
     </div>
- </template>
+   </template>
+  </div>
+ </div>
 </div>
 
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import {mainStore} from '../../store.js'
+const mainstore = mainStore();
 
-let cart = localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false;
+let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false);
 
+function remove(item){
+    cart.value = cart.value.filter(obj=>obj.id !== item.id);
+    localStorage.setItem('cart',JSON.stringify(cart.value));
+    localStorage.setItem('cartcount',localStorage.getItem('cartcount')-1);
+    mainstore.setCartCount(localStorage.getItem('cartcount'));
+}
 
 </script>

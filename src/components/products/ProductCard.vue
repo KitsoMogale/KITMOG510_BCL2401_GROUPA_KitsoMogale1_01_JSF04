@@ -107,14 +107,13 @@ import {mainStore} from '../../store.js'
        let cartcount = getCartCount();
        cartcount++;
        localStorage.setItem('cartcount',cartcount);
-       mainstore.setCartCount();
-       console.log(localStorage.getItem('cartcount'))
+       mainstore.setCartCount(localStorage.getItem('cartcount'));
        setTimeout(()=>{added.value = false},2000);
        }
        else{
         alert("Already added to cart");
        }
-       
+
       }
       else{
         alert("Please loggin ");

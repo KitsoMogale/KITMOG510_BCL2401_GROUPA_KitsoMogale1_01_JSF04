@@ -46,6 +46,7 @@
 <script setup>
   import { ref } from 'vue';
   import {mainStore} from '../../store.js'
+  import { jwtDecode } from "jwt-decode"
 
 let user;
 let password;
@@ -76,7 +77,10 @@ async function login(e){
    }
   
    mainstore.setLoggedin(true);
+   data = jwtDecode(data.token);
+   console.log(data);
    localStorage.setItem('token',JSON.stringify(data));
+   mainstore.setCartCount(localStorage.getItem('cartcount')?localStorage.getItem('cartcount'):0);
    authenticating.value = false;
 }
 

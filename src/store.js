@@ -14,15 +14,15 @@ export const mainStore = defineStore('mainstore',{
         sorting: "default",
         searchTerm: "",
         filterItem: "All categories",
-        loggedin: false,
-        cartcount: localStorage.getItem('cartcount')&& this.loggedin?localStorage.getItem('cartcount'):0,
+        loggedin: localStorage.getItem('token')?true:false,
+        cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
 
      }),
 
      actions: {
 
-      setCartCount(){
-       this.cartcount= localStorage.getItem('cartcount')
+      setCartCount(num){
+       this.cartcount= num;
       },
 
       setLoggedin(bool){
