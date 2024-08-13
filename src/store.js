@@ -17,9 +17,15 @@ export const mainStore = defineStore('mainstore',{
         loggedin: localStorage.getItem('token')?true:false,
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
         total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
+        page:'/'
      }),
 
      actions: {
+
+      setPage(url){
+
+         this.page = url;
+      },
 
       setTotal(num){
         this.total = num;

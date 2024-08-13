@@ -24,7 +24,7 @@
                      Wishlist
                    </router-link>
                  </li>
-                 <router-link  to="/cart">
+                 <div @click="openCart">
                    <li class="hidden lg:block md:block relative">
                      <div class="t-0 absolute left-3 -top-4">
                        <p class="flex h-2 w-2 items-center  justify-center rounded-full bg-red-500 p-3 text-xs text-white">
@@ -46,7 +46,7 @@
                        />
                      </svg>
                    </li>
-               </router-link>
+               </div>
                  <li>
                    <router-link
                      to=""
@@ -81,15 +81,25 @@
 
    <script setup>
 import {mainStore} from '../store.js'
+import { useRouter } from 'vue-router';
 
     const mainstore = mainStore();
-
+    const router = useRouter()
     
     
   function logout(){
      mainstore.setLoggedin(false);
      localStorage.removeItem("token");
      mainstore.setCartCount(0);
+  }
+
+  function openCart(){
+    if(mainstore.loggedin){
+      router.push('/cart')
+    }
+    else{
+      alert('Please login')
+    }
   }
  
    </script>

@@ -128,8 +128,8 @@ import {mainStore} from '../../store.js'
 
       }
     else{
-        alert("Please loggin ");
-        router.push(`/login`)
+        alert("Please login ");
+        mainstore.setPage('/cart');
       }
 
      }

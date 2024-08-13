@@ -47,6 +47,7 @@
   import { ref } from 'vue';
   import {mainStore} from '../../store.js'
   import { jwtDecode } from "jwt-decode"
+  import { useRouter } from 'vue-router'
 
 let user;
 let password;
@@ -55,6 +56,7 @@ let error1 = ref(false);
 let error2 = ref()
 let authenticating = ref(false);
 const mainstore = mainStore();
+const router = useRouter();
 
 async function login(e){
    e.preventDefault();
@@ -82,6 +84,7 @@ async function login(e){
    localStorage.setItem('token',JSON.stringify(data));
    mainstore.setCartCount(localStorage.getItem('cartcount')?localStorage.getItem('cartcount'):0);
    authenticating.value = false;
+   router.push(mainstore.page);
 }
 
 
