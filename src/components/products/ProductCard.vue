@@ -84,26 +84,38 @@ import {mainStore} from '../../store.js'
       router.push(`/product/${props.product.id}`)
     }
 
-    function getArrayFromLocalStorage() {
+
+
+ function getArrayFromLocalStorage() {
     const storedArray = localStorage.getItem('cart');
     return storedArray ? JSON.parse(storedArray) : [];
-}
+   }
+
+ function getTotalFromLocalStorage() {
+    const storedArray = localStorage.getItem('total');
+     
+    return storedArray ? JSON.parse(storedArray) :0; 
+   }
 
   function getCartCount(){
     const count = localStorage.getItem('cartcount');
     return count ? count : 0;
-  }
+   }
 
-    function addToCart(){
-      if(mainstore.loggedin){
+  function addToCart(){
+    if(mainstore.loggedin){
       
        let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
        let storedArr = getArrayFromLocalStorage();
+       let total = getTotalFromLocalStorage();
+       total += props.product.price;
+       mainstore.setTotal(total);
+       localStorage.setItem('total',total);
 
        if(!storedArr.some(item => item.id === objProduct.id)){
-       storedArr.push(objProduct);
-       localStorage.setItem('cart', JSON.stringify(storedArr));
-       added.value = true;
+        storedArr.push(objProduct);
+        localStorage.setItem('cart', JSON.stringify(storedArr));
+        added.value = true;
        let cartcount = getCartCount();
        cartcount++;
        localStorage.setItem('cartcount',cartcount);
@@ -115,11 +127,11 @@ import {mainStore} from '../../store.js'
        }
 
       }
-      else{
+    else{
         alert("Please loggin ");
         router.push(`/login`)
       }
 
-    }
+     }
 
 </script>

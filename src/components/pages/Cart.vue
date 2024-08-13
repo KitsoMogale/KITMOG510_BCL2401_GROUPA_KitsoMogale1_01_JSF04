@@ -44,18 +44,22 @@
                      </div>
       </div>
     </div>
-    
    </template>
   </div>
  </div>
 </div>
-
+<div>
+        <h3 class="bg-gray-300">
+            Total: ${{ total}}
+        </h3>
+    </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
 const mainstore = mainStore();
+const total = ref(mainstore.total)
 
 let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false);
 
