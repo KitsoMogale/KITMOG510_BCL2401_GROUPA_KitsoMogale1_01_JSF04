@@ -35,11 +35,12 @@
             >Remove</button>
           </div>
         </div>
-        <div @click="()=>increment(product.id)" class="flex bg-yellow-300 w-9 rounded hover:bg-yellow-400">
-                       <p>+</p>
+        <div class="flex">
+                       <p @click="()=>increment(product.id)" class="bg-yellow-300 w-7 rounded hover:bg-yellow-400 flex justify-center">+</p>
                        <p class="flex h-2 w-2 items-center  justify-center rounded-full bg-red-500 p-3 text-xs text-white">
                          {{ magnitudes[index].mag }}
                        </p>
+                       <p @click="()=>decrement(product.id)" class="bg-yellow-300 w-7 rounded hover:bg-yellow-400 flex justify-center">-</p>
                      </div>
       </div>
     </div>
@@ -80,6 +81,23 @@ function increment(id){
         }
          
     })
+
+    
+}
+
+function decrement(id){
+
+magnitudes.value = magnitudes.value.map(item=>{
+    let addOne;
+    if(id == item.id&& item.mag){
+       addOne = item.mag -1;
+      return {id:item.id,mag:addOne}
+    }
+    else{
+        return {id:item.id,mag:item.mag}
+    }
+     
+})
 }
 
 </script>
