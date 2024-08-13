@@ -3,7 +3,7 @@
   <div v-if="cart">
     <div class="grid justify-center">
         <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
-     <template v-for="product in cart">
+     <template v-for="(product,index) in cart">
         
      <div
          class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
@@ -35,8 +35,15 @@
             >Remove</button>
           </div>
         </div>
+        <div @click="()=>increment(product.id)" class="flex bg-yellow-300 w-9 rounded hover:bg-yellow-400">
+                       <p>+</p>
+                       <p class="flex h-2 w-2 items-center  justify-center rounded-full bg-red-500 p-3 text-xs text-white">
+                         {{ magnitudes[index].mag }}
+                       </p>
+                     </div>
       </div>
     </div>
+    
    </template>
   </div>
  </div>
@@ -51,11 +58,28 @@ const mainstore = mainStore();
 
 let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false);
 
+let magnitudes = ref(cart.value.map(item=>({id:item.id,mag:1})));
+
 function remove(item){
     cart.value = cart.value.filter(obj=>obj.id !== item.id);
     localStorage.setItem('cart',JSON.stringify(cart.value));
     localStorage.setItem('cartcount',localStorage.getItem('cartcount')-1);
     mainstore.setCartCount(localStorage.getItem('cartcount'));
+}
+
+function increment(id){
+
+    magnitudes.value = magnitudes.value.map(item=>{
+        let addOne;
+        if(id == item.id){
+           addOne = item.mag +1;
+          return {id:item.id,mag:addOne}
+        }
+        else{
+            return {id:item.id,mag:item.mag}
+        }
+         
+    })
 }
 
 </script>
