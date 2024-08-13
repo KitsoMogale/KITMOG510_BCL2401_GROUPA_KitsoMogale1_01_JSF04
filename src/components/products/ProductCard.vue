@@ -92,9 +92,9 @@ import {mainStore} from '../../store.js'
    }
 
  function getTotalFromLocalStorage() {
-    const storedArray = localStorage.getItem('total');
-     
-    return storedArray ? JSON.parse(storedArray) :0; 
+    const storedArray = Number(localStorage.getItem('total'))>=0? Number(localStorage.getItem('total')) :0;
+   
+    return storedArray ; 
    }
 
   function getCartCount(){

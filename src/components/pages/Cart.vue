@@ -50,7 +50,7 @@
 </div>
 <div>
         <h3 class="bg-gray-300">
-            Total: ${{ total}}
+            Total: ${{ mainstore.total}}
         </h3>
     </div>
 </template>
@@ -59,13 +59,19 @@
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
 const mainstore = mainStore();
-const total = ref(mainstore.total)
 
 let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false);
 
 let magnitudes = ref(cart.value.map(item=>({id:item.id,mag:1})));
 
 function remove(item){
+    let total4 = Number(localStorage.getItem('total'));
+    let product = cart.value.filter(item2=>item.id==item2.id);
+    let multiple = magnitudes.value.filter(obj=>obj.id == item.id);
+            total4 -= product[0].price*multiple[0].mag;
+            mainstore.setTotal(total4);
+            localStorage.setItem('total',total4);
+
     cart.value = cart.value.filter(obj=>obj.id !== item.id);
     localStorage.setItem('cart',JSON.stringify(cart.value));
     localStorage.setItem('cartcount',localStorage.getItem('cartcount')-1);
@@ -76,7 +82,14 @@ function increment(id){
 
     magnitudes.value = magnitudes.value.map(item=>{
         let addOne;
+        let total2 = Number(localStorage.getItem('total'));
+        console.log(total2)
+        
         if(id == item.id){
+            let product = cart.value.filter(item2=>id==item2.id);
+            total2 += product[0].price;
+            mainstore.setTotal(total2);
+            localStorage.setItem('total',total2);
            addOne = item.mag +1;
           return {id:item.id,mag:addOne}
         }
@@ -93,7 +106,12 @@ function decrement(id){
 
 magnitudes.value = magnitudes.value.map(item=>{
     let addOne;
+    let total3 = Number(localStorage.getItem('total'));
     if(id == item.id&& item.mag){
+        let product = cart.value.filter(item2=>id==item2.id);
+            total3 -= product[0].price;
+            mainstore.setTotal(total3);
+            localStorage.setItem('total',total3);
        addOne = item.mag -1;
       return {id:item.id,mag:addOne}
     }

@@ -16,7 +16,7 @@ export const mainStore = defineStore('mainstore',{
         filterItem: "All categories",
         loggedin: localStorage.getItem('token')?true:false,
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
-        total:localStorage.getItem('total')?localStorage.getItem('total'):0,
+        total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
      }),
 
      actions: {
