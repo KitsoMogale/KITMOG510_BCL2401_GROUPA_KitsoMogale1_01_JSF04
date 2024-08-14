@@ -86,7 +86,15 @@ import {mainStore} from '../../store.js'
 
       let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,}
       let storedArr = getWishlistFromLocalStorage();
-      
+
+      if(!storedArr.some(item => item.id === objProduct.id)){
+        storedArr.push(objProduct);
+        localStorage.setItem('wishlist', JSON.stringify(storedArr));
+       }
+       else{
+        alert("Already in wishlist");
+       }
+
     }
     else{
         alert("Please login ");
