@@ -74,10 +74,24 @@ import {mainStore} from '../../store.js'
   let added = ref(false);
   const mainstore = mainStore();
 
-
+  function getWishlistFromLocalStorage() {
+    const storedArray = localStorage.getItem('wishlist');
+    return storedArray ? JSON.parse(storedArray) : [];
+   }
 
   const addToFavourites = (event) => {
     event.stopPropagation();
+
+    if(mainstore.loggedin){
+
+      let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,}
+      let storedArr = getWishlistFromLocalStorage();
+      
+    }
+    else{
+        alert("Please login ");
+      }
+
   };
 
  function handleClick() {
