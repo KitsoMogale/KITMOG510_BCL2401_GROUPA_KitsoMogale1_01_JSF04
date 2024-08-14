@@ -3,7 +3,7 @@
    <div v-if="wishlist">
     <div class="grid justify-center">
         <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
-     <template v-for="(product,index) in wishlist">
+     <template v-for="product in wishlist" key="product.id">
         
      <div
          class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
@@ -34,7 +34,7 @@
             class="inline-flex justify-center whitespace-nowrap rounded-lg bg-red-400 px-3 py-2 text-sm font-medium text-white hover:bg-red-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors"
             >Remove</button>
           </div>
-          <button  v-show="!added" type="button" @click="addToCart" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+          <button  v-show="!added" type="button" @click="()=>addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               Add To Cart
             </button>
             <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
@@ -42,10 +42,10 @@
             </div>
         </div>
       </div>
-    </div>
-   </template>
+     </div>
+    </template>
+   </div>
   </div>
- </div>
 </div>
 </template>
 
@@ -80,14 +80,14 @@ function getCartCount(){
     return storedArray ? JSON.parse(storedArray) : [];
    }
 
- function addToCart(){
-
-    let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
+ function addToCart(product){
+   console.log(12)
+    let objProduct = {id:product.id,img:product.img,title:product.title,rating:product.rating,price:product.price,category:product.category,};
        let storedArr = getArrayFromLocalStorage();
        let total = getTotalFromLocalStorage();
-       total += props.product.price;
-       mainstore.setTotal(total);
-       localStorage.setItem('total',total);
+       total += product.price;
+       mainstore.setTotal(Math.floor(total));
+       localStorage.setItem('total',Math.floor(total));
 
        if(!storedArr.some(item => item.id === objProduct.id)){
         storedArr.push(objProduct);

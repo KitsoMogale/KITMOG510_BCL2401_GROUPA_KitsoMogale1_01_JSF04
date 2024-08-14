@@ -68,9 +68,9 @@ function remove(item){
     let total4 = Number(localStorage.getItem('total'));
     let product = cart.value.filter(item2=>item.id==item2.id);
     let multiple = magnitudes.value.filter(obj=>obj.id == item.id);
-            total4 -= product[0].price*multiple[0].mag;
-            mainstore.setTotal(total4);
-            localStorage.setItem('total',total4);
+            total4 -= Math.floor(product[0].price)*multiple[0].mag;
+            mainstore.setTotal(Math.floor(total4));
+            localStorage.setItem('total',Math.floor(total4));
 
     cart.value = cart.value.filter(obj=>obj.id !== item.id);
     localStorage.setItem('cart',JSON.stringify(cart.value));

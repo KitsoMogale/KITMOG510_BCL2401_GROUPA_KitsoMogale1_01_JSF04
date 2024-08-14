@@ -130,7 +130,7 @@ import {mainStore} from '../../store.js'
        let objProduct = {id:props.product.id,img:props.product.image,title:props.product.title,rating:props.product.rating,price:props.product.price,category:props.product.category,};
        let storedArr = getArrayFromLocalStorage();
        let total = getTotalFromLocalStorage();
-       total += props.product.price;
+       total += Math.floor(props.product.price);
        mainstore.setTotal(total);
        localStorage.setItem('total',total);
 
