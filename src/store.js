@@ -17,7 +17,8 @@ export const mainStore = defineStore('mainstore',{
         loggedin: localStorage.getItem('token')?true:false,
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
         total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
-        page:'/'
+        page:'/',
+        ratings:localStorage.getItem('ratings')?localStorage.getItem('ratings'):[]
      }),
 
      actions: {

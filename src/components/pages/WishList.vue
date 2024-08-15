@@ -9,7 +9,7 @@
          class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
         >
     
-         <img class="object-contain h-48 mt-3" :src="product.img" alt="img" />
+         <img @click='()=>handleClick(product)' class="object-contain h-48 mt-3" :src="product.img" alt="img" />
     
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
@@ -34,10 +34,10 @@
             class="inline-flex justify-center whitespace-nowrap rounded-lg bg-red-400 px-3 py-2 text-sm font-medium text-white hover:bg-red-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors"
             >Remove</button>
           </div>
-          <button  v-show="!added" type="button" @click="()=>addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+          <button v-show="!added" type="button" @click="()=>addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
               Add To Cart
             </button>
-            <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+            <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
              <p class="m-auto"> Added to cart</p>
             </div>
         </div>
@@ -47,15 +47,25 @@
    </div>
   </div>
 </div>
+<button @click="clearWishList"
+ class="inline-flex justify-center m-4 whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2 text-sm font-medium text-white hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit"
+>Clear</button>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
+import { useRouter } from 'vue-router'
 const mainstore = mainStore();
 
 let wishlist = ref(localStorage.getItem('wishlist')?JSON.parse(localStorage.getItem('wishlist')):false);
 let added = ref(false);
+const router = useRouter();
+
+function clearWishList(){
+  localStorage.setItem('wishlist',[]);
+  wishlist.value = false;
+}
 
 function remove(item){
 
@@ -63,6 +73,10 @@ function remove(item){
     localStorage.setItem('wishlist',JSON.stringify(wishlist.value));
 
 }
+
+function handleClick(product) {
+      router.push(`/product/${product.id}`)
+    }
 
 function getCartCount(){
     const count = localStorage.getItem('cartcount');

@@ -30,21 +30,54 @@
         >
           {{props.product.category}}
         </span>
-
+        <div>
+          <label htmlFor="rate" class="w-20 my-auto font-semibold">
+        Give a rating:{{" "}}
+      </label>
+          <select
+        @change='handleSort'
+        :value='mainstore.ratings[props.product.id]'
+        name="Rate"
+        id="rate"
+        class="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+      >
+        <option value="default">5 Star</option>
+        <option value="4">4  Star</option>
+        <option value="3">3 Star</option>
+        <option value="2">2 Star</option>
+        <option value="1">1 Star</option>
+      </select>
+        </div>
         <h3 class="text-xl md:text-2xl lg:text-2xl font-bold">${{props.product.price}}</h3>
         <button class="bg-cyan-700 hover:bg-cyan-900 w-[90%] md:w-[14rem] lg:w-[14rem]  text-white font-bold py-2 px-4 rounded">
           Add To Cart
         </button>
         <h2 class="text-lg font-bold">Description</h2>
         <p>{{props.product.description}}</p>
+        
       </div>
     </div>
 </template>
 
 
 <script setup>
-
+import {mainStore} from '../../store.js'
+import { useRouter } from 'vue-router'
 const props = defineProps(['product']);
 
+const mainstore = mainStore();
+const router = useRouter();
+
+
+
+const handleSort = (event) => {
+  // mainstore.setSorting(event.target.value);
+  // mainstore.sortProducts();
+
+  let ratingArr = localStorage.getItem('ratings')?localStorage.getItem('ratings'):[];
+  ratingArr.push({id:props.product.id,rating:event.target.value})
+  
+
+};
 
 </script>

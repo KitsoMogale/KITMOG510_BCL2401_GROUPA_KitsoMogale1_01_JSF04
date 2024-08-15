@@ -53,6 +53,9 @@
             Total: ${{ mainstore.total}}
         </h3>
     </div>
+    <button @click="clearCart"
+    class="inline-flex m-4 justify-center whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2 text-sm font-medium text-white hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit"
+    >Clear</button>
 </template>
 
 <script setup>
@@ -60,9 +63,15 @@ import { ref } from 'vue';
 import {mainStore} from '../../store.js'
 const mainstore = mainStore();
 
-let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):false);
+let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[]);
 
 let magnitudes = ref(cart.value.map(item=>({id:item.id,mag:1})));
+function clearCart(){
+  localStorage.setItem('cart',[]);
+  cart.value = [];
+  mainstore.setTotal(0);
+  localStorage.setItem('total',0);
+}
 
 function remove(item){
     let total4 = Number(localStorage.getItem('total'));
