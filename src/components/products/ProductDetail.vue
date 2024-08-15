@@ -93,7 +93,6 @@ const props = defineProps(['product']);
 const mainstore = mainStore();
 let rating = ref(mainstore.ratings.filter(item=>item.id == props.product.id));
 rating.value = rating.value.length>0? rating.value : [{rate:0}];
-console.log(rating.value[0])
 
 const handleSort = (event) => {
   // mainstore.setSorting(event.target.value);
@@ -102,14 +101,11 @@ const handleSort = (event) => {
   let ratingArr = localStorage.getItem('ratings')?JSON.parse(localStorage.getItem('ratings')):[];
   if(!ratingArr.some(item => item.id === props.product.id && item.rate === rating.value.rate)){
     ratingArr = ratingArr.filter(i=>i.id !== props.product.id)
-    console.log(ratingArr)
   ratingArr.push({id:props.product.id,rate:event.target.value});
   }
   localStorage.setItem('ratings',JSON.stringify(ratingArr));
   mainstore.setRating(ratingArr);
-  console.log(mainstore.ratings)
-  rating.value = mainstore.ratings;
-  console.log(rating.value);
+  rating.value = mainstore.ratings.filter(item=>item.id == props.product.id);
   
 };
 

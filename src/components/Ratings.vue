@@ -32,5 +32,4 @@ import {ref} from 'vue'
 const props = defineProps(['rating']);
 
 const { rate, count } = props.rating;
-console.log(props.rating.rate)
 </script>
