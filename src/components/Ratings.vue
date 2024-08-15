@@ -32,7 +32,5 @@ import {ref} from 'vue'
 const props = defineProps(['rating']);
 
 const { rate, count } = props.rating;
-  const yellowStars = Math.round(rate)
-  const blankStars = 5 - yellowStars
-
+console.log(props.rating.rate)
 </script>
