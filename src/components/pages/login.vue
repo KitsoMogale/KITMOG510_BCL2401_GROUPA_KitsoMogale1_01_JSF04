@@ -80,7 +80,7 @@ async function login(e){
   
    mainstore.setLoggedin(true);
    data = jwtDecode(data.token);
-   console.log(data);
+   console.log(data.user);
    localStorage.setItem('token',JSON.stringify(data));
    mainstore.setCartCount(localStorage.getItem('cartcount')?localStorage.getItem('cartcount'):0);
    authenticating.value = false;

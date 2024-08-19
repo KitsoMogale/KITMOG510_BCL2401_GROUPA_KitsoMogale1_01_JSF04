@@ -2,7 +2,7 @@
   
       <div class="mt-6 sm:mt-8 lg:flex lg:items-start  lg:max-w-6xl xl:max-w-7xl ">
       <div class="mx-auto w-2/5 flex-none">
-        <router-link  to="/" type="button" @click="back" class=" m-5 inline-flex justify-center whitespace-nowrap  bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
+        <router-link  to="/" type="button" class=" m-5 inline-flex justify-center whitespace-nowrap  bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               back
             </router-link>
         <img :src="props.product.image" alt="" class="w-[90%] h-[90%]" />
@@ -91,6 +91,9 @@
              <p class="m-auto">Successfully posted</p>
             </div>
       </div>
+      <div v-show="error1" class="bg-red-400 w-fit m-auto border-green-900 rounded p-5">
+             <p class="m-auto">{{ error2 }}</p>
+            </div>
 
     </div>
 </template>
@@ -104,13 +107,31 @@ const props = defineProps(['product']);
 const mainstore = mainStore();
 let rating = ref(mainstore.ratings.filter(item=>item.id == props.product.id));
 rating.value = rating.value.length>0? rating.value : [{rate:0}];
-let comment;
-const added = ref(false)
+let comment = ref('');
+const added = ref(false);
+let error1 = ref(false);
+let error2 = ref()
+let data;
 
-function post(){
- localStorage.setItem('comment',comment);
+async function post(){
+  if(mainstore.loggedin){
+    try{ let res = await fetch(`https://fakestoreapi.com/users/${JSON.parse(localStorage.getItem('token')).sub}`)
+            
+            data = await res.json();
+ localStorage.setItem('comment',JSON.stringify({comment:comment.value,name:data.name.firstname,surname:data.name.lastname}));
  added.value = true;
  setTimeout(()=>{added.value = false},2000);
+  }
+  catch(error){
+      error1.value = true;
+      error2 = error;
+      console.log(error)
+   }
+
+  }
+  else{
+    alert('Please login');
+  }
 
 }
 

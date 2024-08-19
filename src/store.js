@@ -14,7 +14,7 @@ export const mainStore = defineStore('mainstore',{
         sorting: "default",
         searchTerm: "",
         filterItem: "All categories",
-        loggedin: localStorage.getItem('token')?true:false,
+        loggedin: localStorage.getItem('token')?true:false,//if token exists , the user is loggedin else not logged in
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
         total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
         page:'/',
