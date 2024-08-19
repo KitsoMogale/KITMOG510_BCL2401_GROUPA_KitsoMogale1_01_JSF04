@@ -69,6 +69,8 @@ let magnitudes = ref(cart.value.map(item=>({id:item.id,mag:1})));
 function clearCart(){
   localStorage.setItem('cart',[]);
   cart.value = [];
+  localStorage.setItem('cartcount',0);
+  mainstore.setCartCount(0);
   mainstore.setTotal(0);
   localStorage.setItem('total',0);
 }
