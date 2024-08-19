@@ -18,10 +18,15 @@ export const mainStore = defineStore('mainstore',{
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
         total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
         page:'/',
-        ratings:localStorage.getItem('ratings')?JSON.parse(localStorage.getItem('ratings')):[]
+        ratings:localStorage.getItem('ratings')?JSON.parse(localStorage.getItem('ratings')):[],
+        comments:localStorage.getItem('comment')?JSON.parse(localStorage.getItem('comment')):[],
      }),
 
      actions: {
+
+      setComments(item){
+        this.comments = item;
+      },
 
       setRating(rating){
         this.ratings = rating;

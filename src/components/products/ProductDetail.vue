@@ -94,6 +94,16 @@
       <div v-show="error1" class="bg-red-400 w-fit m-auto border-green-900 rounded p-5">
              <p class="m-auto">{{ error2 }}</p>
             </div>
+   <h2><b>Comments:</b></h2>
+    <div class="flex-row">
+      <template v-for="c in mainstore.comments" >
+      <div class="bg-blue-600 text-white w-40 m-auto mb-4 p-2 mr-4">
+        <h4><b>{{ c.name }} {{  c.surname }}:</b>{{ c.time }}</h4>
+        <p>{{ c.comment }}</p>
+        <button @click="()=>deleteC(c)" class=" m-2 inline-flex justify-center whitespace-nowrap  bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">delete</button>
+     </div>
+    </template>
+    </div> 
 
     </div>
 </template>
@@ -113,14 +123,27 @@ let error1 = ref(false);
 let error2 = ref()
 let data;
 
+function deleteC(c){
+  let storedC = JSON.parse(localStorage.getItem('comment'));
+  storedC = storedC.filter(item=> c.time!=item.time);
+  mainstore.setComments(storedC);
+  localStorage.setItem('comment',JSON.stringify(storedC));
+}
+
 async function post(){
   if(mainstore.loggedin){
     try{ let res = await fetch(`https://fakestoreapi.com/users/${JSON.parse(localStorage.getItem('token')).sub}`)
             
             data = await res.json();
- localStorage.setItem('comment',JSON.stringify({comment:comment.value,name:data.name.firstname,surname:data.name.lastname}));
+            const currentDate = new Date();
+            const time = ` ${currentDate.getHours()}:${currentDate.getMinutes()}:${currentDate.getMilliseconds()}`
+            let comments = localStorage.getItem('comment')?JSON.parse(localStorage.getItem('comment')):[]; 
+            comments.push({comment:comment.value,name:data.name.firstname,surname:data.name.lastname,time:time,});
+            mainstore.setComments(comments);
+ localStorage.setItem('comment',JSON.stringify(comments));
  added.value = true;
  setTimeout(()=>{added.value = false},2000);
+ comment.value = '';
   }
   catch(error){
       error1.value = true;
