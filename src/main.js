@@ -6,6 +6,7 @@ import Home from './components/pages/Home.vue'
 import login from './components/pages/login.vue'
 import Cart from './components/pages/Cart.vue'
 import WishList from './components/pages/WishList.vue'
+import Checkout from './components/pages/Checkout.vue'
 import pinia from "./store";
 import { createRouter, createWebHistory } from "vue-router";
 
@@ -14,7 +15,8 @@ const routes = [
     { path: "/product/:id", component: ProductDetailView },
     { path: "/login", component: login },
     { path: "/cart", component: Cart },
-    { path: "/wishlist", component: WishList }
+    { path: "/wishlist", component: WishList },
+    { path: "/checkout", component: Checkout }
   ];
   
   const router = createRouter({
