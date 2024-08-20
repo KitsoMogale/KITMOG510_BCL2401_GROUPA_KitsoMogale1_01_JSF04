@@ -52,9 +52,11 @@
             <button  v-show="!added" type="button" @click="addToCart" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               Add To Cart
             </button>
+
             <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
              <p class="m-auto"> Added to cart</p>
             </div>
+          
           </div>
         </div>
       </div>

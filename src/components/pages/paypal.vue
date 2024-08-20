@@ -4,6 +4,8 @@
 
 <script setup>
 import { loadScript } from "@paypal/paypal-js";
+import {mainStore} from '../../store.js'
+const mainstore = mainStore();
 
 loadScript({ "client-id": "AcLiBpncoxV9vgI9_-_p1JymsE0saX4TvmOBe2n_d-eC2dYt88xreE9DM85QeNhSqKq85GWsRcwHWYvJ" }).then((paypal) => {
       paypal.Buttons({
@@ -11,7 +13,7 @@ loadScript({ "client-id": "AcLiBpncoxV9vgI9_-_p1JymsE0saX4TvmOBe2n_d-eC2dYt88xre
           return actions.order.create({
             purchase_units: [{
               amount: {
-                value: '0.01' // Can reference your dynamic pricing here
+                value: `${mainstore.total}` // Can reference your dynamic pricing here
               }
             }]
           });

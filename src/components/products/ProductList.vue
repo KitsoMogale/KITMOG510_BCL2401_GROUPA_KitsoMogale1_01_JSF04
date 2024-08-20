@@ -15,7 +15,7 @@
       </div>
 
       <div class="grid justify-center">
-        <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
+        <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4 ">
         
         <ProductCard v-for="product in mainstore.products" key="product.id" :product='product' />;
    

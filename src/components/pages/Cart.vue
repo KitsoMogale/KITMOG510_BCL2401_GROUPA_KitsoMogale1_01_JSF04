@@ -57,7 +57,7 @@
     <button @click="clearCart"
     class="inline-flex m-4 w-40 text-lg justify-center whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2  font-medium text-black hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit"
     >Clear</button>
-    <router-link to="/checkout" @click="checkout" class="inline-flex m-4 w-40 text-lg justify-center whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2  font-medium text-black hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">Checkout</router-link >
+    <router-link to="/checkout" @click="checkout" class="inline-flex m-4 w-40 text-lg justify-center whitespace-nowrap rounded-lg bg-green-600 px-3 py-2  font-medium text-white hover:bg-green-800 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">Go To Checkout</router-link >
 </template>
 
 <script setup>
