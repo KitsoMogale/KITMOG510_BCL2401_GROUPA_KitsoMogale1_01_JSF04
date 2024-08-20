@@ -4,7 +4,7 @@
       :class="[theme,'flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 border border-black shadow shadow-slate-950/5 rounded-2xl overflow-hidden']"
     >
     
-      <img @click='handleClick' class="object-contain h-48 mt-3" :src="props.product.image" alt="Course 01" />
+      <img @click='handleClick' :class="[theme2,'object-contain h-48 mt-3']" :src="props.product.image" alt="Course 01" />
     
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
@@ -30,7 +30,7 @@
           <div class="justify-end space-x-2">
             <button @click='addToFavourites'>
               <svg
-                class="me-1.5 h-5 w-5 hover:fill-red-500 "
+                class="me-1.5 h-5 w-5 hover:fill-red-800 fill-white "
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -78,7 +78,11 @@ import { computed } from "vue"
   const mainstore = mainStore();
 
   const theme = computed(()=>{
-     return mainstore.theme? 'bg-gray-800':'bg-black'
+     return mainstore.theme? 'bg-gray-200':'bg-black'
+  });
+
+  const theme2 = computed(()=>{
+     return mainstore.theme? 'brightness-100':'brightness-50'
   })
 
   function getWishlistFromLocalStorage() {

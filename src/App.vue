@@ -17,7 +17,7 @@ import { mainStore } from "./store";
 const mainstore = mainStore();
 
   const theme = computed(()=>{
-     return mainstore.theme? 'bg-gray-400':'bg-gray-900'
+     return mainstore.theme? 'bg-blue-200':'bg-gray-900'
   })
 
   

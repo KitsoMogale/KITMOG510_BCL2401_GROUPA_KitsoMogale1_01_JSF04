@@ -95,6 +95,15 @@
    import {mainStore} from '../store.js'
    import { getCategories } from "../api.js";
    import {ref} from 'vue'
+   import { computed } from "vue";
+
+const theme = computed(()=>{
+  return mainstore.theme? 'text-black':'text-white'
+})
+
+const theme2 = computed(()=>{
+  return mainstore.theme? 'text-gray-800 bg-white':'text-white bg-black'
+})
 
   
         const mainstore = mainStore();
