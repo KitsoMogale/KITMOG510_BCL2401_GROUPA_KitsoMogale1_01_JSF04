@@ -15,6 +15,7 @@ export const mainStore = defineStore('mainstore',{
         searchTerm: "",
         filterItem: "All categories",
         loggedin: localStorage.getItem('token')?true:false,//if token exists , the user is loggedin else not logged in
+        user: localStorage.getItem('user')?JSON.parse(localStorage.getItem('user')):null,
         cartcount: localStorage.getItem('cartcount')&& localStorage.getItem('token')?localStorage.getItem('cartcount'):0,
         total:localStorage.getItem('total')?Number(localStorage.getItem('total')):0,
         page:'/',
@@ -23,6 +24,9 @@ export const mainStore = defineStore('mainstore',{
      }),
 
      actions: {
+      setUser(obj){
+         this.user = obj;
+      },
 
       setComments(item){
         this.comments = item;

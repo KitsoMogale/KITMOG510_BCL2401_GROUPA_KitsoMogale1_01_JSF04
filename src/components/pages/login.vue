@@ -52,6 +52,7 @@
 let user;
 let password;
 let data;
+let data2;
 let error1 = ref(false);
 let error2 = ref()
 let authenticating = ref(false);
@@ -83,6 +84,18 @@ async function login(e){
    console.log(data.user);
    localStorage.setItem('token',JSON.stringify(data));
    mainstore.setCartCount(localStorage.getItem('cartcount')?localStorage.getItem('cartcount'):0);
+
+   //    get user details
+try{ let res = await fetch(`https://fakestoreapi.com/users/${JSON.parse(localStorage.getItem('token')).sub}`)
+            
+            data2 = await res.json();
+            localStorage.setItem('user',JSON.stringify(data2));
+            mainstore.setUser(data2);
+  }
+  catch(error){
+      console.log(error)
+   }
+
    authenticating.value = false;
    router.push(mainstore.page);
 }
