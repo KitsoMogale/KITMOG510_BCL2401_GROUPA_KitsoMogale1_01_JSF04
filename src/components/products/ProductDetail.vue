@@ -5,9 +5,9 @@
         <router-link  to="/" type="button" class=" m-5 inline-flex justify-center whitespace-nowrap  bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">
               back
             </router-link>
-        <img :src="props.product.image" alt="" class="w-[90%] h-[90%]" />
+        <img :src="props.product.image" alt="" class="w-[90%] h-[90%] border-black" />
       </div>
-      <div class="mx-auto  w-[90%] space-y-2 ">
+      <div class="mx-auto  w-[90%] space-y-2 border-black">
         <h1 class="text-2xl md:text-4xl lg:text-4xl font-bold">{{props.product.title}}</h1>
         
           <div v-if="props.product.rating" class="flex gap-2">

@@ -21,9 +21,14 @@ export const mainStore = defineStore('mainstore',{
         page:'/',
         ratings:localStorage.getItem('ratings')?JSON.parse(localStorage.getItem('ratings')):[],
         comments:localStorage.getItem('comment')?JSON.parse(localStorage.getItem('comment')):[],
+        theme: false,
      }),
 
      actions: {
+      setTheme(color){
+        this.theme = color;
+      },
+
       setUser(obj){
          this.user = obj;
       },

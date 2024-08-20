@@ -1,6 +1,6 @@
 <template >
     <header class="sticky z-50 top-0">
-         <nav class="bg-gray-500 border-gray-200 ">
+         <nav :class="[theme, 'border-gray-200'] ">
            <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
              <router-link to="/">
                <button class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -15,7 +15,7 @@
                class="hidden w-full md:block md:w-auto"
                id="navbar-dropdown"
              >
-               <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-500 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
+               <ul class="flex flex-col top-10 font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 ">
                  <li>
                    <div @click="wishlist"
                      class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
@@ -81,10 +81,14 @@
    <script setup>
 import {mainStore} from '../store.js'
 import { useRouter } from 'vue-router';
+import { computed } from "vue";
 
     const mainstore = mainStore();
     const router = useRouter()
     
+    const theme = computed(()=>{
+     return mainstore.theme? 'bg-gray-800':'bg-black'
+  })
     
   function logout(){
      mainstore.setLoggedin(false);

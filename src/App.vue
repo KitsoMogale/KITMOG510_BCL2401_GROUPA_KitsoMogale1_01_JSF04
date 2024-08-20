@@ -1,24 +1,28 @@
 
 <template>
+  <div :class="theme">
   <Header></Header>
   <router-view>
 </router-view>
 
-
+</div>
 </template>
 
-<script >
+<script setup>
 
 import Header  from "./components/Header.vue";
+import { computed } from "vue";
+import { mainStore } from "./store";
 
-export default {
-  name: 'App',
+const mainstore = mainStore();
 
-  components:{
-    Header,
-  }
+  const theme = computed(()=>{
+     return mainstore.theme? 'bg-gray-400':'bg-gray-900'
+  })
 
-}
+  
+
+
 
 </script>
 
