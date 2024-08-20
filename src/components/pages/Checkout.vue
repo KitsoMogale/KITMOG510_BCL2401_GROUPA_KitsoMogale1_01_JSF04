@@ -5,23 +5,25 @@
         
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
-            Name
+            Name:
           </label>
-          <input v-model="name" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your Name">
+          <input v-model="mainstore.user.name.firstname" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Your Name">
         </div>
   
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
-            Email
+            Email:
           </label>
-          <input v-model="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email Address">
+          <input v-model="mainstore.user.email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email Address">
         </div>
   
         <div class="mb-4">
           <label class="block text-gray-700 text-sm font-bold mb-2" for="address">
-            Address
+            Shipping Address:
           </label>
-          <input v-model="address" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="address" type="text" placeholder="Shipping Address">
+          <input v-model="mainstore.user.address.city" class="shadow appearance-none border mb-2 rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="City">
+          <input v-model="mainstore.user.address.street" class="shadow appearance-none border mb-2 rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Street">
+          <input v-model="mainstore.user.address.number" class="shadow appearance-none border mb-2 rounded w-max py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Number">
         </div>
   
         <div class="flex items-center justify-between">
