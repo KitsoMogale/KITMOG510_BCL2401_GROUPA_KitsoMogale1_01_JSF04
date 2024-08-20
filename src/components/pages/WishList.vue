@@ -34,10 +34,10 @@
             class="inline-flex justify-center whitespace-nowrap rounded-lg bg-red-400 px-3 py-2 text-sm font-medium text-white hover:bg-red-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors"
             >Remove</button>
           </div>
-          <button v-show="!added" type="button" @click="()=>addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
+          <button v-show="!(added == product.id)" type="button" @click="()=>addToCart(product)" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
               Add To Cart
             </button>
-            <div v-show="added" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
+            <div v-show="added == product.id" class="inline-flex justify-center whitespace-nowrap rounded-lg bg-green-400 px-3 py-2 text-sm font-medium text-white hover:bg-green-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit">
              <p class="m-auto"> Added to cart</p>
             </div>
         </div>
@@ -59,7 +59,7 @@ import { useRouter } from 'vue-router'
 const mainstore = mainStore();
 
 let wishlist = ref(localStorage.getItem('wishlist')?JSON.parse(localStorage.getItem('wishlist')):false);
-let added = ref(false);
+let added = ref(null);
 const router = useRouter();
 
 function clearWishList(){
@@ -95,7 +95,6 @@ function getCartCount(){
    }
 
  function addToCart(product){
-   console.log(12)
     let objProduct = {id:product.id,img:product.img,title:product.title,rating:product.rating,price:product.price,category:product.category,};
        let storedArr = getArrayFromLocalStorage();
        let total = getTotalFromLocalStorage();
@@ -106,12 +105,12 @@ function getCartCount(){
        if(!storedArr.some(item => item.id === objProduct.id)){
         storedArr.push(objProduct);
         localStorage.setItem('cart', JSON.stringify(storedArr));
-        added.value = true;
+        added.value = product.id;
        let cartcount = getCartCount();
        cartcount++;
        localStorage.setItem('cartcount',cartcount);
        mainstore.setCartCount(localStorage.getItem('cartcount'));
-       setTimeout(()=>{added.value = false},2000);
+       setTimeout(()=>{added.value = null},2000);
        }
        else{
         alert("Already added to cart");

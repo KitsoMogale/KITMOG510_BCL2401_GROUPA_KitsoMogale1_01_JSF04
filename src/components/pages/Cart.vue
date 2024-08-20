@@ -49,18 +49,21 @@
  </div>
 </div>
 <div>
-        <h3 class="bg-gray-300">
+        <h3 class="bg-gray-300 mb-4">
             Total: ${{ mainstore.total}}
         </h3>
+        
     </div>
     <button @click="clearCart"
-    class="inline-flex m-4 justify-center whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2 text-sm font-medium text-white hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit"
+    class="inline-flex m-4 w-40 text-lg justify-center whitespace-nowrap rounded-lg bg-yellow-400 px-3 py-2  font-medium text-black hover:bg-yellow-600 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors h-fit"
     >Clear</button>
+    <paypal class="mx-auto relative left-[45%]"></paypal>
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
+import paypal from './paypal.vue';
 const mainstore = mainStore();
 
 let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[]);

@@ -103,6 +103,7 @@
         <button @click="()=>deleteC(c)" class=" m-2 inline-flex justify-center whitespace-nowrap  bg-cyan-700 px-3 py-2 text-sm font-medium text-white hover:bg-cyan-900 focus-visible:outline-none focus-visible:ring focus-visible:ring-indigo-300 transition-colors">delete</button>
      </div>
     </template>
+  
     </div> 
 
     </div>
