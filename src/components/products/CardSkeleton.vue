@@ -1,7 +1,7 @@
 <template >
     <div
       role="status"
-      class="bg-white max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700"
+      :class="[theme,'bg-white max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700']"
     >
       <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
         <svg
@@ -24,7 +24,14 @@
 </template>
 
 
-<script>
+<script setup>
+import { computed } from "vue";
+import {mainStore} from '../../store.js'
 
+const mainstore = mainStore();
+
+    const theme = computed(()=>{
+     return mainstore.theme? 'bg-white':'bg-gray-600'
+  })
 
 </script>

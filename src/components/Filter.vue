@@ -5,7 +5,7 @@
           @click='toggleDropdown'
           id="dropdown-button"
           data-dropdown-toggle="dropdown"
-          class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 "
+          :class="[theme,'flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center border border-gray-300 rounded-s-lg'] "
           type="button"
         >
           {{mainstore.filterItem}}
@@ -27,15 +27,15 @@
         </button>
         <div
           id="dropdown"
-          class="z-10 absolute top-[100%] hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
+          :class="[theme3,'z-10 absolute top-[100%] hidden  divide-y divide-gray-100 rounded-lg shadow w-44']"
         >
           <ul
-            class="py-2 text-sm text-gray-700"
+            :class="[theme3,'py-2 text-sm ']"
             aria-labelledby="dropdown-button"
           >
             <li
               @click="handleFilter('All categories')"
-              class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+              :class="[theme4,'inline-flex w-full px-4 py-2'] "
             >
               All categories
             </li>
@@ -44,7 +44,7 @@
                   <button
                   type="button"
                   @click="handleFilter(name)"
-                    class="inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                    :class="[theme4,'inline-flex w-full px-4 py-2'] "
                   >
                     {{name}}
                   </button>
@@ -57,7 +57,7 @@
             type="search"
             id="search-dropdown"
             name="searchInput"
-            class=" p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
+            :class=" [theme2,'p-2.5 w-full z-20 text-sm rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500'] "
             placeholder="Search products..."
             :value='mainstore.searchTerm'
             @input='handleSearch'
@@ -98,11 +98,19 @@
    import { computed } from "vue";
 
 const theme = computed(()=>{
-  return mainstore.theme? 'text-black':'text-white'
+  return mainstore.theme? 'text-black bg-gray-100 hover:bg-gray-200':'text-white bg-black hover:bg-gray-700'
 })
 
 const theme2 = computed(()=>{
-  return mainstore.theme? 'text-gray-800 bg-white':'text-white bg-black'
+  return mainstore.theme? 'text-gray-900 bg-gray-50':'text-white bg-gray-900 '
+})
+
+const theme3 = computed(()=>{
+  return mainstore.theme? 'text-gray-900 bg-gray-50':'text-white bg-black'
+})
+
+const theme4 = computed(()=>{
+  return mainstore.theme? 'hover:bg-gray-100':'hover:bg-blue-600'
 })
 
   
