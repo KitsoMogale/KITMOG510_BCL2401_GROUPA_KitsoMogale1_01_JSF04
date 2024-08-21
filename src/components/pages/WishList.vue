@@ -6,10 +6,10 @@
      <template v-for="product in wishlist" key="product.id">
         
      <div
-         class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
+        :class="[theme,'flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 border border-black shadow shadow-slate-950/5 rounded-2xl overflow-hidden']"
         >
     
-         <img @click='()=>handleClick(product)' class="object-contain h-48 mt-3" :src="product.img" alt="img" />
+         <img @click='()=>handleClick(product)' :class="[theme2,'object-contain h-48 mt-3']" :src="product.img" alt="img" />
     
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
@@ -56,11 +56,21 @@
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
 import { useRouter } from 'vue-router'
+import { computed } from "vue"
 const mainstore = mainStore();
 
 let wishlist = ref(localStorage.getItem('wishlist')?JSON.parse(localStorage.getItem('wishlist')):false);
 let added = ref(null);
 const router = useRouter();
+
+
+const theme = computed(()=>{
+     return mainstore.theme? 'bg-gray-200':'bg-black'
+  });
+
+  const theme2 = computed(()=>{
+     return mainstore.theme? 'brightness-100':'brightness-50'
+  })
 
 function clearWishList(){
   localStorage.setItem('wishlist',[]);

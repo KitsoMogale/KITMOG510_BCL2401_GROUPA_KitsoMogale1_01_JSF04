@@ -6,10 +6,10 @@
      <template v-for="(product,index) in cart">
         
      <div
-         class="flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 bg-white border border-slate-200 shadow shadow-slate-950/5 rounded-2xl overflow-hidden"
+       :class="[theme,'flex flex-col max-h-[130rem]  cursor-pointer max-w-80 hover:-translate-y-1 hover:scale-105 duration-300 border border-black shadow shadow-slate-950/5 rounded-2xl overflow-hidden']"
         >
     
-         <img class="object-contain h-48 mt-3" :src="product.img" alt="img" />
+         <img :class="[theme2,'object-contain h-48 mt-3']" :src="product.img" alt="img" />
     
       <div class="flex-1 flex flex-col p-6">
         <div class="flex-1">
@@ -63,6 +63,7 @@
 <script setup>
 import { ref } from 'vue';
 import {mainStore} from '../../store.js'
+import { computed } from "vue"
 const mainstore = mainStore();
 
 let cart = ref(localStorage.getItem('cart')?JSON.parse(localStorage.getItem('cart')):[]);
@@ -77,9 +78,13 @@ function clearCart(){
   localStorage.setItem('total',0);
 }
 
-function checkout(){
-  
-}
+const theme = computed(()=>{
+     return mainstore.theme? 'bg-gray-200':'bg-black'
+  });
+
+  const theme2 = computed(()=>{
+     return mainstore.theme? 'brightness-100':'brightness-50'
+  })
 
 function remove(item){
     let total4 = Number(localStorage.getItem('total'));
