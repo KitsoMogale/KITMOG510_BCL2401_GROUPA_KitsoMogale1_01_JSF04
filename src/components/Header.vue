@@ -105,7 +105,7 @@ import { computed } from "vue";
 
   function themeChange(){
     mainstore.setTheme(!mainstore.theme);
-    localStorage.setItem('theme',!mainstore.theme);
+    localStorage.setItem('theme',mainstore.theme);
   }
     
     const theme = computed(()=>{
