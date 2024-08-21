@@ -19,7 +19,7 @@
                 <li>
                    <div @click="themeChange"
                      v-show="!mainstore.theme"
-                     class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                     class="block py-2 px-3 text-white rounded hover:bg-gray-300 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                    >
                      Dark Mode
                  </div>
@@ -27,7 +27,7 @@
                  <li>
                    <div @click="themeChange"
                      v-show="mainstore.theme"
-                     class="block py-2 px-3 text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+                     class="block py-2 px-3 text-white rounded hover:bg-gray-300 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
                    >
                      Light Mode
                  </div>

@@ -1,7 +1,7 @@
 <template >
-   <h1 class="bg-white w-40 text-2xl font-semibold text-orange-400 border mx-auto">WishList</h1>
+   <h1 class="bg-white w-40 text-2xl  font-semibold text-orange-400 border mx-auto">WishList</h1>
    <div v-if="wishlist">
-    <div class="grid justify-center">
+    <div class="grid justify-center ">
         <div class="lg:max-h-[130rem] max-w-xl mx-auto grid gap-4 grid-cols-1 lg:grid-cols-4 md:grid-cols-2 items-center lg:max-w-none my-4">
      <template v-for="product in wishlist" key="product.id">
         
